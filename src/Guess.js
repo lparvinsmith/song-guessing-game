@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import SongData from "./SongData"
 import RNFS from 'react-native-fs';
+import GuessInput from "./GuessInput"
 
 const audioFile = 'audio.m4a';
 const audioPath = RNFS.DocumentDirectoryPath;
@@ -18,6 +19,8 @@ export default class Guess extends Component {
       playAudio: false
     };
     this.downloadSong = this.downloadSong.bind(this);
+    this.onChangeGuess = this.onChangeGuess.bind(this);
+    this.onGuess = this.onGuess.bind(this);
   }
 
   componentDidMount(){
@@ -45,14 +48,46 @@ export default class Guess extends Component {
       })
   }
 
+  onChangeGuess(guess) {
+    this.setState({guess});
+  }
+
+  onGuess() {
+    console.warn(this.state.guess);
+  }
+
   render() {
     const {artistName, trackName, collectionName, previewUrl} = this.state.song;
     return (
-      <View>
-        <Text>{trackName}</Text>
-        <Text>{artistName}</Text>
-        <Text>{collectionName}</Text>
+      <View style={styles.container}>
+        <GuessInput
+          style={styles.guessInput}
+          onChangeGuess={this.onChangeGuess}
+          onGuess={this.onGuess}
+          guess={this.state.guess}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  flashMessage: {
+    flex: 0.4,
+    justifyContent: 'center'
+  },
+  flashMessageText: {
+    color: "red",
+    fontSize: 30,
+  },
+  guessInput: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }
+});
