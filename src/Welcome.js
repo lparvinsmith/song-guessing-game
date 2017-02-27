@@ -12,20 +12,8 @@ export default class Welcome extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcomeText}>Hello React-Native</Text>
-        <Button title="SIMPLE BUTTON" onPress={() => null} color="blue"/>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-              style={styles.customButton}
-              color="blue">
-            <Text style={styles.buttonText}>PRESS ME</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-              style={styles.customButton}
-              color="blue">
-            <Text style={styles.buttonText}>NO! PRESS ME</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.welcome}>Guess That Song</Text>
+        <Button title="start" onPress={this.props.onStartPlaying}/>
       </View>
     );
   }
@@ -34,27 +22,15 @@ export default class Welcome extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
-    alignItems: "center"
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  inputContainer: {
-    width: 350,
-    height: 100,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center"
-  },
-  welcomeText: {
-    fontSize: 30
-  },
-
-  customButton: {
-    borderRadius: 4,
-    backgroundColor: "blue",
-    width: 140,
-    padding: 10,
-  },
-  buttonText: {
-    color: "white",
+  welcome: {
+    fontSize: 40,
+    color: 'blue',
+    textAlign: 'center',
+    fontWeight: 'bold'
   }
 });
+
