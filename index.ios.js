@@ -7,11 +7,12 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import Welcome from "./src/Welcome";
+import RandomColor from "./src/RandomColor"
 
 export default class SongGuessingGame extends Component {
   render() {
     return (
-      <Welcome />
+      <RandomColor />
     );
   }
 }
