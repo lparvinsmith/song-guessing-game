@@ -24,6 +24,7 @@ export default class Guess extends Component {
     this.downloadSong = this.downloadSong.bind(this);
     this.onChangeGuess = this.onChangeGuess.bind(this);
     this.onGuess = this.onGuess.bind(this);
+    this.onDone = this.onDone.bind(this);
   }
 
   componentDidMount(){
@@ -41,7 +42,7 @@ export default class Guess extends Component {
       })
       .then((s) => {
         return RNFS.downloadFile({
-          fromUrl: s.audioUrl,
+          fromUrl: s.previewUrl,
           toFile: `${audioPath}/${audioFile}`
         }).promise;
       })
@@ -51,12 +52,46 @@ export default class Guess extends Component {
       })
   }
 
+  verifyGuess(guess) {
+    const guesses = guess.trim().toLowerCase().split(/\s+/);
+    const answers = `${this.state.song.artist} ${this.state.song.trackName}`
+                        .trim().toLowerCase();
+    return guesses.reduce(function(acc, g) {
+      if (answers.indexOf(g) >= 0) {
+        return true;
+      }
+      return acc;
+    }, false);
+  }
+
   onChangeGuess(guess) {
     this.setState({guess});
   }
 
   onGuess() {
-    console.warn(this.state.guess);
+    guess = this.state.guess
+    if (this.verifyGuess(guess)) {
+      console.warn("hooray", guess);
+    }
+    else {
+      console.warn("boo", guess);
+    }
+  }
+
+  onDone() {
+    console.warn("song done");
+  }
+
+  renderPlayHint() {
+    if(this.state.playAudio){
+      return (
+        <PlayHint
+          audioFile={audioFile}
+          audioPath={audioPath}
+          onSongDone={this.onDone}
+        />
+      )
+    }
   }
 
   render() {
@@ -69,10 +104,7 @@ export default class Guess extends Component {
           onGuess={this.onGuess}
           guess={this.state.guess}
         />
-        <PlayHint
-          audioFile={audioFile}
-          audioPath={audioPath}
-        />
+        {this.renderPlayHint()}
       </View>
     );
   }
