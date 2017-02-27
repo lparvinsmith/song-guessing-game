@@ -7,6 +7,10 @@ const audioFile = 'audio.m4a';
 const audioPath = RNFS.DocumentDirectoryPath;
 
 export default class Guess extends Component {
+  static navigationOptions = {
+    title: 'Guess That Song'
+  }
+
   constructor(props){
     super(props)
     this.state = {

@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import Welcome from "./Welcome";
 import Guess from "./Guess";
+import {StackNavigator} from 'react-navigation';
 
-export default class GameContainer extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      startGame: false
-    };
-    this.onStartPlaying = this.onStartPlaying.bind(this);
-  }
+const GameContainer = StackNavigator({
+  Welcome: { screen: Welcome },
+  Guess: { screen: Guess }
+}, {
+  initialRouteName: "Welcome"
+});
 
-  onStartPlaying() {
-    this.setState({startGame: true})
-  }
-
-  render() {
-    return this.state.startGame ?
-        <Guess/> :
-        <Welcome onStartPlaying={this.onStartPlaying}/>
-  }
-}
+export default GameContainer;

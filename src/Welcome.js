@@ -10,10 +10,11 @@ import {
 
 export default class Welcome extends Component {
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Guess That Song</Text>
-        <Button title="start" onPress={this.props.onStartPlaying}/>
+        <Button title="start" onPress={()=>navigate("Guess")}/>
       </View>
     );
   }
