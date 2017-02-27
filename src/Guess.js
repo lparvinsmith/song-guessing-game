@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import SongData from "./SongData"
 import RNFS from 'react-native-fs';
 import GuessInput from "./GuessInput"
+import PlayHint from './PlayHint';
 
 const audioFile = 'audio.m4a';
 const audioPath = RNFS.DocumentDirectoryPath;
@@ -16,7 +17,9 @@ export default class Guess extends Component {
     super(props)
     this.state = {
       song: {},
-      playAudio: false
+      playAudio: false,
+      guess: '',
+      guessCorrect: undefined,
     };
     this.downloadSong = this.downloadSong.bind(this);
     this.onChangeGuess = this.onChangeGuess.bind(this);
@@ -65,6 +68,10 @@ export default class Guess extends Component {
           onChangeGuess={this.onChangeGuess}
           onGuess={this.onGuess}
           guess={this.state.guess}
+        />
+        <PlayHint
+          audioFile={audioFile}
+          audioPath={audioPath}
         />
       </View>
     );
