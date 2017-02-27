@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native'
+import CustomButton from './CustomButton'
 
 export default class Welcome extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class Welcome extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Guess That Song</Text>
-        <Button title="start" onPress={()=>navigate("Guess")}/>
+        <CustomButton title="Start" onPress={()=>navigate("Guess")}/>
       </View>
     );
   }

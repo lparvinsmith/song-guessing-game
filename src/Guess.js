@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingTop: 200,
   },
   flashMessage: {
     flex: 0.4,

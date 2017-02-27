@@ -7,7 +7,8 @@ const GameContainer = StackNavigator({
   Welcome: { screen: Welcome },
   Guess: { screen: Guess }
 }, {
-  initialRouteName: "Welcome"
+  initialRouteName: "Welcome",
+  headerMode: "none"
 });
 
 export default GameContainer;

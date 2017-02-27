@@ -6,6 +6,7 @@ import {
   Button,
   StyleSheet
 } from 'react-native';
+import CustomButton from './CustomButton'
 
 export default class GuessInput extends Component {
   render() {
@@ -15,9 +16,9 @@ export default class GuessInput extends Component {
           value={this.props.guess}
           onChangeText={this.props.onChangeGuess}
           style={styles.input}/>
-        <Button
+        <CustomButton
           onPress={this.props.onGuess}
-          title="GUESS"/>
+          title="Guess!"/>
       </View>
     );
   }
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ededed',
     height: 50,
     width: 250,
-    marginBottom: 15
+    marginBottom: 15,
+    borderRadius: 4
   }
 });
