@@ -4,6 +4,7 @@ import SongData from "./SongData"
 import RNFS from 'react-native-fs';
 import GuessInput from "./GuessInput"
 import PlayHint from './PlayHint';
+import { NavigationActions } from 'react-navigation'
 
 const audioFile = 'audio.m4a';
 const audioPath = RNFS.DocumentDirectoryPath;
@@ -25,6 +26,7 @@ export default class Guess extends Component {
     this.onChangeGuess = this.onChangeGuess.bind(this);
     this.onGuess = this.onGuess.bind(this);
     this.onDone = this.onDone.bind(this);
+    this.showAnswer = this.showAnswer.bind(this);
   }
 
   componentDidMount(){
@@ -71,15 +73,35 @@ export default class Guess extends Component {
   onGuess() {
     guess = this.state.guess
     if (this.verifyGuess(guess)) {
-      console.warn("hooray", guess);
+      this.setState({guessCorrect: true}, this.showAnswer)
+      //this.showAnswer()
     }
     else {
-      console.warn("boo", guess);
+      console.warn("wrong!")
     }
   }
 
   onDone() {
-    console.warn("song done");
+    this.setState({guessCorrect: false})
+    this.showAnswer()
+  }
+
+  showAnswer() {
+    console.warn("show answer")
+    const { artistName, trackName, collectionName } = this.state.song;
+    const { guessCorrect } = this.state;
+    const navigationAction = NavigationActions.navigate({
+      routeName: 'AnswerNavigator',
+      params: {},
+
+      // navigate can have a nested navigate action that will
+      // be run inside the child router
+      action: NavigationActions.navigate({
+          routeName: 'Answer',
+          params: {artistName, trackName, collectionName, guessCorrect}
+      })
+    })
+    this.props.navigation.dispatch(navigationAction)
   }
 
   renderPlayHint() {
